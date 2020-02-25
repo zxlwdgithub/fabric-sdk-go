@@ -339,7 +339,9 @@ func (c *IdentityConfig) getServerCerts(caConfig *CAConfig) ([][]byte, error) {
 		}
 		return serverCerts, nil
 	}
-
+	if len(caConfig.TLSCACerts.Path) == 0 {//zxl add
+		return serverCerts, nil
+	}
 	//check for files if pems not found
 	certFiles := strings.Split(caConfig.TLSCACerts.Path, ",")
 	serverCerts = make([][]byte, len(certFiles))
